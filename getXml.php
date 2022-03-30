@@ -2,15 +2,14 @@
 $is_woj = false;
 if (isset($_GET["woj"]))
     $is_woj = true;
-$woj_name = "";
-if (isset($_GET['name']))
-    $woj_name = $_GET["name"];
-
+$number = -1;
+if (isset($_GET['number']))
+    $number = $_GET["number"];
 $xml = simplexml_load_file("terc.xml");
 if ($is_woj == false) {
-    $response = $xml->xpath('//NAZWA_DOD[text()="województwo"]/ancestor::*/NAZWA/text()');
-} else if ($woj_name != "") {
-    $response = $xml->xpath('//NAZWA_DOD[contains(text(), "miej")]/ancestor::*/WOJ[text()=//NAZWA[text()="' . $woj_name . '"]/ancestor::*/WOJ/text()]/ancestor::*/NAZWA/text()');
+    $response = $xml->xpath("catalog/row[NAZWA_DOD='województwo']/NAZWA");
+} else if ($number != -1) {
+    $response = $xml->xpath("catalog/row[WOJ=$number and (RODZ=1 or RODZ=4)]/NAZWA");
 } else {
     echo "error";
     die();

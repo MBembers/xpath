@@ -4,15 +4,18 @@ fetch("getXml.php")
   .then((response) => response.json())
   .then((data) => {
     console.log("data", data);
+    let i = 1;
     for (let woj of data) {
       let tr = document.createElement("tr");
       let td = document.createElement("td");
       td.className = "clickable";
       td.innerText = woj[0];
+      let k = i;
       td.addEventListener("click", () => {
         for (let child of Array.from(main.children)) main.removeChild(child);
         main.innerHTML = "ładowanie...";
-        fetch("getXml.php?woj=true&name=" + woj[0])
+        let j = k;
+        fetch("getXml.php?woj=true&number=" + String(j * 2))
           .then((res) => res.json())
           .then((dt) => {
             main.innerHTML = "";
@@ -28,5 +31,6 @@ fetch("getXml.php")
       });
       tr.appendChild(td);
       main.appendChild(tr);
+      i++;
     }
   });
