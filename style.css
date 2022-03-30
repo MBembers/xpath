@@ -1,0 +1,16 @@
+table {
+  width: 200px;
+  border: solid black 1px;
+  border-collapse: collapse;
+}
+td {
+  border: solid black 1px;
+  border-collapse: collapse;
+  padding: 10px;
+}
+tr {
+  border-collapse: collapse;
+}
+.clickable {
+  cursor: pointer;
+}
